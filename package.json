@@ -1,7 +1,7 @@
 {
   "name": "imahima",
   "version": "1.0.0",
-  "description": "他人との空き時間を簡単に共有し集まるためのAPI ## 機能",
+  "description": "他人との空き時間を簡単に共有し集まるためのAPI",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,7 @@
     "express": "^4.16.2",
     "morgan": "^1.9.0",
     "nodemon": "^1.17.1",
+    "path": "^0.12.7",
     "pug": "^2.0.0"
   }
 }

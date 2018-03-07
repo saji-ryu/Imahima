@@ -1,0 +1,19 @@
+{
+  "name": "imahima",
+  "version": "1.0.0",
+  "description": "他人との空き時間を簡単に共有し集まるためのAPI ## 機能",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saji-ryu/Imahima.git"
+  },
+  "author": "Ryusei Sajiki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saji-ryu/Imahima/issues"
+  },
+  "homepage": "https://github.com/saji-ryu/Imahima#readme"
+}

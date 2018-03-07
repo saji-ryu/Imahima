@@ -1,8 +1,11 @@
+///<reference path="../node_modules/@types/node/index.d.ts"/>
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as logger from "morgan";
 import * as path from "path";
+
+import { IndexRoute } from "./routes/index";
 
 export class Server {
     public app: express.Application;
@@ -42,7 +45,7 @@ export class Server {
         }));
 
         //mount cookie parser middleware
-        this.app.use(cookieParser("SECRET_GOES_HERE"));
+        this.app.use(cookieParser());
 
         // catch 404 and forward to error handler
         this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -51,10 +54,25 @@ export class Server {
         });
 
         //error handling
-        this.app.use(errorHandler());
+        this.app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
+            res.locals.message = err.message;
+            res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+            res.status(err.status || 500);
+            res.render('error');
+        });
+    }
+
+    private routes() {
+        let router: express.Router;
+        router = express.Router();
+
+        IndexRoute.create(router);
+        //use router middleware
+        this.app.use(router);
     }
 
     public api() {
-        //empty for now
+
     }
 }

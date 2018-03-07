@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/saji-ryu/Imahima#readme",
   "dependencies": {
+    "@types/express": "^4.11.1",
+    "@types/node": "^9.4.6",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",

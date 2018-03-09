@@ -5,7 +5,9 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as path from "path";
 
-import { IndexRoute } from "./routes/index";
+import {indexRoute} from "./routes/index";
+import {getRoute} from "./routes/get"
+import {postRoute} from "./routes/post"
 
 export class Server {
     public app: express.Application;
@@ -67,7 +69,9 @@ export class Server {
         let router: express.Router;
         router = express.Router();
 
-        IndexRoute.create(router);
+        this.app.use('/index', indexRoute);
+
+        indexRoute.create(router);
         //use router middleware
         this.app.use(router);
     }

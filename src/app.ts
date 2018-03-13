@@ -5,9 +5,9 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as path from "path";
 
-import {indexRoute} from "./routes/index";
-import {getRoute} from "./routes/get"
-import {postRoute} from "./routes/post"
+import index from "./routes/index";
+import get from "./routes/get";
+import post from "./routes/post";
 
 export class Server {
     public app: express.Application;
@@ -66,14 +66,16 @@ export class Server {
     }
 
     private routes() {
-        let router: express.Router;
-        router = express.Router();
+        // let router: express.Router;
+        // router = express.Router();
 
-        this.app.use('/index', indexRoute);
+        this.app.use('/', index);
+        this.app.use('/get',get);
+        this.app.use('/post',post);
 
-        indexRoute.create(router);
+        // indexRoute.create(router);
         //use router middleware
-        this.app.use(router);
+        // this.app.use(router);
     }
 
     public api() {

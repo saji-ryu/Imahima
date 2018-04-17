@@ -79,6 +79,5 @@ export class Server {
     }
 
     public api() {
-
     }
 }

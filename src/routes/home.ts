@@ -4,7 +4,7 @@ const router : express.Router = express.Router();
 router.get('/',function (req,res) {
     res.render('home', {
         title: 'login demo',
-        usr: req.user
+        session: req.session.passport
     });
 });
 

@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function (req, res) {
     res.render('home', {
         title: 'login demo',
-        usr: req.user
+        session: req.session.passport
     });
 });
 exports.default = router;

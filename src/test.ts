@@ -5,7 +5,7 @@ import * as logger from "morgan";
 import * as path from "path";
 import * as errorHandler from "errorhandler";
 
-import { IndexRoute } from "./routes/index";
+import { IndexRoute } from "./routes/home";
 
 /**
  * The server.

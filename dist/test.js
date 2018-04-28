@@ -6,7 +6,7 @@ var express = require("express");
 var logger = require("morgan");
 var path = require("path");
 var errorHandler = require("errorhandler");
-var index_1 = require("./routes/index");
+var home_1 = require("./routes/home");
 /**
  * The server.
  *
@@ -90,7 +90,7 @@ var Server = /** @class */ (function () {
         var router;
         router = express.Router();
         //IndexRoute
-        index_1.IndexRoute.create(router);
+        home_1.IndexRoute.create(router);
         //use router middleware
         this.app.use(router);
     };

@@ -1,0 +1,11 @@
+include base.pug
+include head.pug
+body
+    h1 #{title}
+    h2 ログイン
+     if (usr)
+         #usr_photo
+             img(src=usr.photos[0].value)
+         #usr_name #{usr.username}
+     else
+         a(href="/oauth/twitter") twitterログイン

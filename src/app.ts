@@ -13,6 +13,7 @@ const TwitterStrategy = passport_twitter.Strategy;
 
 import home from "./routes/home";
 import oauth from "./routes/oauth";
+import newuser from './routes/newuser';
 
 require('dotenv').config();
 
@@ -94,6 +95,7 @@ app.use(passport.session());
 //router
 app.use('/', home);
 app.use('/oauth', oauth);
+app.use('/newuser',newuser);
 
 
 //server

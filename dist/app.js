@@ -13,6 +13,7 @@ var mongoose = require("mongoose");
 var TwitterStrategy = passport_twitter.Strategy;
 var home_1 = require("./routes/home");
 var oauth_1 = require("./routes/oauth");
+var newuser_1 = require("./routes/newuser");
 require('dotenv').config();
 var TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
@@ -71,6 +72,7 @@ app.use(passport.session());
 //router
 app.use('/', home_1.default);
 app.use('/oauth', oauth_1.default);
+app.use('/newuser', newuser_1.default);
 //server
 app.listen(port, function () {
     console.log("Listening at http://localhost:" + port + "/");

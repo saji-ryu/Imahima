@@ -2,10 +2,10 @@ include base.pug
 include head.pug
 body
     h1 #{title}
-    h2 ログイン
      if (session)
          #usr_photo
              img(src=session.user.photos[0].value)
-         #usr_name #{session.user.username}
+         #usr_name #{session.user.displayName}
      else
+         h2 ログイン
          a(href="/oauth/twitter") twitterログイン

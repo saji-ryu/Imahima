@@ -7,6 +7,7 @@ import * as path from "path";
 import * as session from "express-session";
 import * as passport from "passport";
 import * as passport_twitter from "passport-twitter";
+import * as mongoose from "mongoose";
 
 const TwitterStrategy = passport_twitter.Strategy;
 
@@ -16,10 +17,10 @@ import oauth from "./routes/oauth";
 require('dotenv').config();
 
 const TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
-const TWITTER_CONSUMER_SECRET= process.env.TW_CONSUMER_SECRET;
+const TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 
 
-const port: number = 3000;
+const port: number = Number(process.env.PORT) || 3000;
 
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -98,4 +99,7 @@ app.use('/oauth', oauth);
 //server
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/`);
+    mongoose.connect('mongodb://localhost/imahima',()=>{
+        console.log('connected to mongo');
+    });
 });

@@ -4,7 +4,13 @@
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist/",
-    "types": ["node"]
+    "types": ["node"],
+    "lib": [
+      "dom",
+      "es2015",
+      "es5",
+      "es6"
+    ]
   },
   "include": [
     "src/**/*"

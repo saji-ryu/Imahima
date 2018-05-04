@@ -1,0 +1,1 @@
+{"version":3,"file":"newuser.js","sourceRoot":"","sources":["../../src/routes/newuser.ts"],"names":[],"mappings":";;AAAA,iCAAmC;AAEnC,IAAM,MAAM,GAAmB,OAAO,CAAC,MAAM,EAAE,CAAC;AAEhD,MAAM,CAAC,GAAG,CAAC,GAAG,EAAE,UAAU,GAAG,EAAE,GAAG;IAC9B,GAAG,CAAC,MAAM,CAAC,SAAS,EAAE;QAClB,KAAK,EAAE,WAAW;KACrB,CAAC,CAAC;AACP,CAAC,CAAC,CAAC;AAGH,kBAAe,MAAM,CAAC"}

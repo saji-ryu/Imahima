@@ -23,6 +23,18 @@ router.post('/', (req, res) => {
     );
 });
 
+router.post('/time', (req, res) => {
+    UserModel.findOneAndUpdate(
+        {UserId: req.session.passport.user.id},
+        (req.body),
+        (err, result) => {
+            console.log(result);
+            console.log(req.body);
+            res.send('test');
+        }
+    );
+});
+
 router.get('/confirm', (req, res) => {
     if (req.session) {
         UserModel.find({UserId: req.session.passport.user.id}, (err, result) => {
@@ -36,6 +48,8 @@ router.get('/confirm', (req, res) => {
         res.send(false);
     }
 });
+
+
 
 
 export default router;

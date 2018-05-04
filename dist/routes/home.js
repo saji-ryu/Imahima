@@ -16,6 +16,13 @@ router.post('/', function (req, res) {
         res.send('test');
     });
 });
+router.post('/time', function (req, res) {
+    model_1.UserModel.findOneAndUpdate({ UserId: req.session.passport.user.id }, (req.body), function (err, result) {
+        console.log(result);
+        console.log(req.body);
+        res.send('test');
+    });
+});
 router.get('/confirm', function (req, res) {
     if (req.session) {
         model_1.UserModel.find({ UserId: req.session.passport.user.id }, function (err, result) {

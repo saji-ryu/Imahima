@@ -1,9 +1,17 @@
-include base.pug
-include head.pug
-body
-    if (udata.matched)
-        h2 #{udata.uname} さんの状況
-        #conditin #{udata.ishima}
-        #time #{udata.time}
-    else
-        h2 No match data
+doctype html
+html(lang="ja")
+    head
+        meta(charset="utf-8")
+        link(rel="stylesheet" href="/css/watch_style.css")
+        title Imahima
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        script(src='/js/home_front.js')
+    body
+        if (udata.matched)
+            h1 #{udata.uname} さんの状況
+            -let con = udata.ishima?'今暇です':'今暇ではないです';
+            #condition #{con}
+            if (udata.ishima)
+                #time 今から#{udata.time}分間
+        else
+            h2 No match data

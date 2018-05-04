@@ -1,0 +1,44 @@
+h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+#usr_photo {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align:center
+}
+#usr_name{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 3%;
+}
+
+#usr_hima{
+    text-align: center;
+
+}
+
+button{
+    background-color: mintcream;
+    height: 60px;
+    width: 200px;
+    font-size: 20px;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    /*text-align:center;*/
+}
+
+#time{
+    text-align: center;
+}
+#himatime{
+    margin-top: 5%;
+    font-size: 20px;
+}

@@ -1,16 +1,26 @@
-//include base.pug
-include head.pug
+doctype html
+html(lang="ja")
+    head
+        meta(charset="utf-8")
+        link(rel="stylesheet" href="/css/home_style.css")
+        title Imahima
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        script(src='/js/home_front.js')
 
-body
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
-    script(src='/js/home_front.js')
-    h1 #{title}
-    if (session)
-        #usr_photo
-            img(src=session.user.photos[0].value)
-        #usr_name #{session.user.displayName}
-        #usr_hima
-            button#himabutton 今暇じゃない
-    else
-        h2 ログイン
-        a(href="/oauth/twitter") twitterログイン
+    body
+        if (session)
+            #usr_photo
+                -let img = session.user.photos[0].value;
+                -let img_origin = img.replace('_normal','');
+                -console.log(img_origin);
+                img.center(src=img_origin)
+            #usr_name #{session.user.displayName}
+            #usr_hima
+                button#himabutton 今暇じゃない
+            #time
+                p#himatime
+                input#himatime_bar(type='range')
+        else
+            h1 #{title}
+            h2 ログイン
+            a(href="/oauth/twitter") twitterログイン

@@ -23,6 +23,7 @@ const TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 const TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 
 const port: number = Number(process.env.PORT) || 3000;
+const monogoURI: string = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
 
 
 //passport
@@ -96,7 +97,7 @@ app.use('/watch',watch);
 //server
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/`);
-    mongoose.connect('mongodb://localhost/imahima',()=>{
+    mongoose.connect(monogoURI,()=>{
         console.log('connected to mongo');
     });
 });

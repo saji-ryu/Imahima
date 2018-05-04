@@ -19,6 +19,7 @@ require('dotenv').config();
 var TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 var port = Number(process.env.PORT) || 3000;
+var monogoURI = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
 //passport
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -76,7 +77,7 @@ app.use('/watch', watch_1.default);
 //server
 app.listen(port, function () {
     console.log("Listening at http://localhost:" + port + "/");
-    mongoose.connect('mongodb://localhost/imahima', function () {
+    mongoose.connect(monogoURI, function () {
         console.log('connected to mongo');
     });
 });

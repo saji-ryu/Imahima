@@ -2,8 +2,9 @@
   "name": "imahima",
   "version": "1.0.0",
   "description": "他人との空き時間を簡単に共有し集まるためのAPI",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
+    "start":"node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

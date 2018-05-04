@@ -23,7 +23,9 @@ const TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 const TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 
 const port: number = Number(process.env.PORT) || 3000;
-const monogoURI: string = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
+const mongoURI: string = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
+//const tw_callback:string = "http://127.0.0.1:3000/oauth/twitter/callback";
+const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
 
 
 //passport
@@ -36,8 +38,8 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new TwitterStrategy({
         consumerKey: TWITTER_CONSUMER_KEY,
         consumerSecret: TWITTER_CONSUMER_SECRET,
-        callbackURL: "http://127.0.0.1:3000/oauth/twitter/callback" //Twitterログイン後、遷移するURL
-    },
+        callbackURL: tw_callback //Twitterログイン後、遷移するURL
+},
     function (token, tokenSecret, profile, done) {
         process.nextTick(function () {
             console.log(profile); //必要に応じて変更
@@ -97,7 +99,7 @@ app.use('/watch',watch);
 //server
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/`);
-    mongoose.connect(monogoURI,()=>{
+    mongoose.connect(mongoURI,()=>{
         console.log('connected to mongo');
     });
 });

@@ -19,7 +19,9 @@ require('dotenv').config();
 var TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 var port = Number(process.env.PORT) || 3000;
-var monogoURI = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
+//const tw_callback:string = "http://127.0.0.1:3000/oauth/twitter/callback";
+var tw_callback = "https://imahima.herokuapp.com/oauth/twitter/callback";
 //passport
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -30,7 +32,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY,
     consumerSecret: TWITTER_CONSUMER_SECRET,
-    callbackURL: "http://127.0.0.1:3000/oauth/twitter/callback" //Twitterログイン後、遷移するURL
+    callbackURL: tw_callback //Twitterログイン後、遷移するURL
 }, function (token, tokenSecret, profile, done) {
     process.nextTick(function () {
         console.log(profile); //必要に応じて変更
@@ -77,7 +79,7 @@ app.use('/watch', watch_1.default);
 //server
 app.listen(port, function () {
     console.log("Listening at http://localhost:" + port + "/");
-    mongoose.connect(monogoURI, function () {
+    mongoose.connect(mongoURI, function () {
         console.log('connected to mongo');
     });
 });

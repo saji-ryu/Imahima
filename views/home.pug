@@ -1,11 +1,16 @@
-include base.pug
+//include base.pug
 include head.pug
+
 body
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src='/js/home_front.js')
     h1 #{title}
-     if (session)
-         #usr_photo
-             img(src=session.user.photos[0].value)
-         #usr_name #{session.user.displayName}
-     else
-         h2 ログイン
-         a(href="/oauth/twitter") twitterログイン
+    if (session)
+        #usr_photo
+            img(src=session.user.photos[0].value)
+        #usr_name #{session.user.displayName}
+        #usr_hima
+            button#himabutton
+    else
+        h2 ログイン
+        a(href="/oauth/twitter") twitterログイン

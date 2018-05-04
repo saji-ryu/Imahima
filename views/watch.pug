@@ -1,0 +1,9 @@
+include base.pug
+include head.pug
+body
+    if (udata.matched)
+        h2 #{udata.uname} さんの状況
+        #conditin #{udata.ishima}
+        #time #{udata.time}
+    else
+        h2 No match data

@@ -14,23 +14,24 @@ const TwitterStrategy = passport_twitter.Strategy;
 import home from "./routes/home";
 import oauth from "./routes/oauth";
 import newuser from './routes/newuser';
+import watch from "./routes/watch";
 
 require('dotenv').config();
+
 
 const TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 const TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 
-
 const port: number = Number(process.env.PORT) || 3000;
 
+
+//passport
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
 passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
-
-
 passport.use(new TwitterStrategy({
         consumerKey: TWITTER_CONSUMER_KEY,
         consumerSecret: TWITTER_CONSUMER_SECRET,
@@ -45,30 +46,22 @@ passport.use(new TwitterStrategy({
 ));
 
 
+//express
 const app = express();
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.use(express.static(path.join(__dirname, "public")));
-
-//configure pug
-// app.set("views", path.join(__dirname, "views"));
+//view settings
 app.set("views", "views/");
 app.set("view engine", "pug");
 
-//mount logger
 app.use(logger("dev"));
-
-//mount json form parser
 app.use(bodyParser.json());
-
-//mount query string parser
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-//mount cookie parser middleware
 app.use(cookieParser());
 
-// catch 404 and forward to error handler
+//catch 404 and forward to error handler
 app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
     err.status = 404;
     next(err);
@@ -89,6 +82,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
+//passport
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -96,6 +90,7 @@ app.use(passport.session());
 app.use('/', home);
 app.use('/oauth', oauth);
 app.use('/newuser',newuser);
+app.use('/watch',watch);
 
 
 //server

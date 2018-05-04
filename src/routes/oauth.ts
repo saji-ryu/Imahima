@@ -10,19 +10,17 @@ router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/login'}), function (req, res) {
     if (req.session.passport) {
         let id: string = req.session.passport.user.id;
-        let username: string = req.session.passport.user.displayName;
-        let icon: string = req.session.passport.user.photos[0].value;
-        //console.log(id + ',' + username + ',' + icon);
+        //let username: string = req.session.passport.user.displayName;
+        //let icon: string = req.session.passport.user.photos[0].value;
         UserModel.find({UserId: id}, (err, result) => {
-            let l: number = result.length;
             if (err) {
                 console.log(err);
             }
-            if (l == 0) {
+            if (result.length == 0) {
                 let user = new UserModel({
-                    UserName: username,
+                    UserName: req.session.passport.user.displayName,
                     UserId: id,
-                    UserIcon: icon,
+                    UserIcon: req.session.passport.user.photos[0].value,
                     IsHima: false,
                     HimaTime: 0
                 });

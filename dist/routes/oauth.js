@@ -8,19 +8,17 @@ router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), function (req, res) {
     if (req.session.passport) {
         var id_1 = req.session.passport.user.id;
-        var username_1 = req.session.passport.user.displayName;
-        var icon_1 = req.session.passport.user.photos[0].value;
-        //console.log(id + ',' + username + ',' + icon);
+        //let username: string = req.session.passport.user.displayName;
+        //let icon: string = req.session.passport.user.photos[0].value;
         model_1.UserModel.find({ UserId: id_1 }, function (err, result) {
-            var l = result.length;
             if (err) {
                 console.log(err);
             }
-            if (l == 0) {
+            if (result.length == 0) {
                 var user = new model_1.UserModel({
-                    UserName: username_1,
+                    UserName: req.session.passport.user.displayName,
                     UserId: id_1,
-                    UserIcon: icon_1,
+                    UserIcon: req.session.passport.user.photos[0].value,
                     IsHima: false,
                     HimaTime: 0
                 });

@@ -14,10 +14,12 @@ var TwitterStrategy = passport_twitter.Strategy;
 var home_1 = require("./routes/home");
 var oauth_1 = require("./routes/oauth");
 var newuser_1 = require("./routes/newuser");
+var watch_1 = require("./routes/watch");
 require('dotenv').config();
 var TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 var port = Number(process.env.PORT) || 3000;
+//passport
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
@@ -34,23 +36,19 @@ passport.use(new TwitterStrategy({
         return done(null, profile);
     });
 }));
+//express
 var app = express();
-app.use(express.static(path.join(__dirname, "public")));
-//configure pug
-// app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "../public")));
+//view settings
 app.set("views", "views/");
 app.set("view engine", "pug");
-//mount logger
 app.use(logger("dev"));
-//mount json form parser
 app.use(bodyParser.json());
-//mount query string parser
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-//mount cookie parser middleware
 app.use(cookieParser());
-// catch 404 and forward to error handler
+//catch 404 and forward to error handler
 app.use(function (err, req, res, next) {
     err.status = 404;
     next(err);
@@ -67,12 +65,14 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+//passport
 app.use(passport.initialize());
 app.use(passport.session());
 //router
 app.use('/', home_1.default);
 app.use('/oauth', oauth_1.default);
 app.use('/newuser', newuser_1.default);
+app.use('/watch', watch_1.default);
 //server
 app.listen(port, function () {
     console.log("Listening at http://localhost:" + port + "/");

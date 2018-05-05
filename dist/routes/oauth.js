@@ -14,7 +14,7 @@ router.get('/twitter/callback', passport.authenticate('twitter', { failureRedire
             }
             if (result.length == 0) {
                 var user = new model_1.UserModel({
-                    UserName: req.session.passport.user.displayName,
+                    UserName: req.session.passport.user.username,
                     UserId: id_1,
                     UserIcon: req.session.passport.user.photos[0].value,
                     IsHima: false,

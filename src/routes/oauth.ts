@@ -10,8 +10,6 @@ router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/login'}), function (req, res) {
     if (req.session.passport) {
         let id: string = req.session.passport.user.id;
-        //let username: string = req.session.passport.user.displayName;
-        //let icon: string = req.session.passport.user.photos[0].value;
         UserModel.find({UserId: id}, (err, result) => {
             if (err) {
                 console.log(err);

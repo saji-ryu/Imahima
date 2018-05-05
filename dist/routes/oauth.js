@@ -8,8 +8,6 @@ router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), function (req, res) {
     if (req.session.passport) {
         var id_1 = req.session.passport.user.id;
-        //let username: string = req.session.passport.user.displayName;
-        //let icon: string = req.session.passport.user.photos[0].value;
         model_1.UserModel.find({ UserId: id_1 }, function (err, result) {
             if (err) {
                 console.log(err);

@@ -4,6 +4,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist/",
+    "jsx": "react",
     "types": ["node"],
     "lib": [
       "dom",

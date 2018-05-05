@@ -1,19 +1,26 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var express = require("express");
-var router = express.Router();
-var model_1 = require("../model");
+import * as express from 'express';
+
+const router: express.Router = express.Router();
+
+import {UserModel} from "../model";
+
+
 router.get('/', function (req, res) {
-    var serch = function () {
+    let serch = () => {
+        interface data {
+            matched: boolean,
+            uname: string,
+            ishima: boolean,
+            time: number
+        }
         console.log(req.query);
-        return new Promise(function (resolve, reject) {
-            model_1.UserModel.find((req.query), function (err, result) {
+        return new Promise((resolve, reject) => {
+            UserModel.find((req.query), (err, result) => {
                 if (err) {
                     console.log(err);
                     reject();
-                }
-                else if (result.length != 0) {
-                    var userdata = {
+                } else if (result.length != 0) {
+                    let userdata:data = {
                         matched: true,
                         uname: result[0].UserName,
                         ishima: result[0].IsHima,
@@ -22,9 +29,8 @@ router.get('/', function (req, res) {
                     console.log(JSON.stringify(result));
                     console.log(JSON.stringify(userdata));
                     resolve(userdata);
-                }
-                else {
-                    var userdata = {
+                } else {
+                    let userdata = {
                         matched: false,
                         uname: "",
                         ishima: false,
@@ -34,16 +40,20 @@ router.get('/', function (req, res) {
                 }
             });
         });
-    };
-    var response = function (udata) {
+    }
+
+    let response = (udata) => {
         res.render('watch', {
             udata: udata
         });
     };
-    serch().then(response).catch(function (e) {
+
+    serch().then(response).catch((e) => {
         console.log(e);
         res.redirect('/');
     });
+
 });
-exports.default = router;
-//# sourceMappingURL=watch.js.map
+
+
+export default router;

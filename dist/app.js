@@ -20,8 +20,8 @@ var TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 var port = Number(process.env.PORT) || 3000;
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
-var tw_callback = "http://127.0.0.1:3000/oauth/twitter/callback";
-//const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
+//const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
+var tw_callback = "https://imahima.herokuapp.com/oauth/twitter/callback";
 //passport
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -66,7 +66,12 @@ app.use(function (err, req, res, next) {
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true,
+    rolling: true,
+    name: 'my-special-site-cookie',
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 30,
+    }
 }));
 //passport
 app.use(passport.initialize());

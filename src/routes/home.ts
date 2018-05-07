@@ -5,15 +5,16 @@ const router: express.Router = express.Router();
 import {UserModel} from "../model";
 
 router.get('/', (req, res) => {
+    //console.log(req.user);
     res.render('home', {
         title: 'login demo',
-        session: req.session.passport
+        session: req.user
     });
 });
 
 router.post('/', (req, res) => {
     UserModel.findOneAndUpdate(
-        {UserId: req.session.passport.user.id},
+        {UserId: req.user.id},
         (req.body),
         (err, result) => {
             console.log(result);
@@ -25,7 +26,7 @@ router.post('/', (req, res) => {
 
 router.post('/time', (req, res) => {
     UserModel.findOneAndUpdate(
-        {UserId: req.session.passport.user.id},
+        {UserId: req.user.id},
         (req.body),
         (err, result) => {
             console.log(result);
@@ -37,7 +38,7 @@ router.post('/time', (req, res) => {
 
 router.get('/confirm', (req, res) => {
     if (req.session) {
-        UserModel.find({UserId: req.session.passport.user.id}, (err, result) => {
+        UserModel.find({UserId: req.user.id}, (err, result) => {
             if (err) {
                 console.log(err);
             }

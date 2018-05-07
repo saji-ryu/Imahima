@@ -6,17 +6,17 @@ var router = express.Router();
 var passport = require("passport");
 router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), function (req, res) {
-    if (req.session.passport) {
-        var id_1 = req.session.passport.user.id;
+    if (req.user) {
+        var id_1 = req.user.id;
         model_1.UserModel.find({ UserId: id_1 }, function (err, result) {
             if (err) {
                 console.log(err);
             }
             if (result.length == 0) {
                 var user = new model_1.UserModel({
-                    UserName: req.session.passport.user.username,
+                    UserName: req.user.username,
                     UserId: id_1,
-                    UserIcon: req.session.passport.user.photos[0].value,
+                    UserIcon: req.user.photos[0].value,
                     IsHima: false,
                     HimaTime: 0
                 });
@@ -32,6 +32,9 @@ router.get('/twitter/callback', passport.authenticate('twitter', { failureRedire
                 res.redirect('/');
             }
         });
+    }
+    else {
+        res.redirect('/');
     }
 });
 exports.default = router;

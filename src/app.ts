@@ -15,6 +15,7 @@ import home from "./routes/home";
 import oauth from "./routes/oauth";
 import newuser from './routes/newuser';
 import watch from "./routes/watch";
+import api from "./routes/api";
 
 require('dotenv').config();
 
@@ -24,8 +25,8 @@ const TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 
 const port: number = Number(process.env.PORT) || 3000;
 const mongoURI: string = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
-//const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
-const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
+const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
+//const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
 
 
 //passport
@@ -57,6 +58,20 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.set("views", "views/");
 app.set("view engine", "pug");
 
+//session
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 30, // 30日
+    }
+}));
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -79,26 +94,12 @@ app.use(function (err: any, req: express.Request, res: express.Response, next: e
     res.render('error');
 });
 
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    rolling: true,
-    name: 'my-special-site-cookie',
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 30, // 30日
-    }
-}));
-
-//passport
-app.use(passport.initialize());
-app.use(passport.session());
-
 //router
 app.use('/', home);
 app.use('/oauth', oauth);
 app.use('/newuser', newuser);
 app.use('/watch', watch);
+app.use('/api',api);
 
 
 //server

@@ -10,11 +10,11 @@ html(lang="ja")
     body
         if (session)
             #usr_photo
-                -let img = session.user.photos[0].value;
+                -let img = session.photos[0].value;
                 -let img_origin = img.replace('_normal','');
                 -console.log(img_origin);
                 img.center(src=img_origin)
-            #usr_name #{session.user.displayName}
+            #usr_name #{session.displayName}
             #usr_hima
                 button#himabutton 今暇じゃない
             #time

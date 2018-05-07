@@ -8,17 +8,17 @@ import * as passport from 'passport';
 router.get('/twitter', passport.authenticate('twitter'));
 
 router.get('/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/login'}), function (req, res) {
-    if (req.session.passport) {
-        let id: string = req.session.passport.user.id;
+    if (req.user) {
+        let id: string = req.user.id;
         UserModel.find({UserId: id}, (err, result) => {
             if (err) {
                 console.log(err);
             }
             if (result.length == 0) {
                 let user = new UserModel({
-                    UserName: req.session.passport.user.username,
+                    UserName: req.user.username,
                     UserId: id,
-                    UserIcon: req.session.passport.user.photos[0].value,
+                    UserIcon: req.user.photos[0].value,
                     IsHima: false,
                     HimaTime: 0
                 });
@@ -33,6 +33,8 @@ router.get('/twitter/callback', passport.authenticate('twitter', {failureRedirec
                 res.redirect('/');
             }
         });
+    }else{
+        res.redirect('/');
     }
 });
 

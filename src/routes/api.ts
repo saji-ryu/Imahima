@@ -24,7 +24,7 @@ router.post('/',(req, res) => {
         (err, result) => {
             console.log(result);
             console.log(req.body);
-            res.send('test');
+            res.send('ok');
         }
     );
 });

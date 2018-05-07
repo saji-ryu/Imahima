@@ -25,8 +25,8 @@ const TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 
 const port: number = Number(process.env.PORT) || 3000;
 const mongoURI: string = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
-const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
-//const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
+//const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
+const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
 
 
 //passport

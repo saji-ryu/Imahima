@@ -15,6 +15,7 @@ import home from "./routes/home";
 import oauth from "./routes/oauth";
 import newuser from './routes/newuser';
 import watch from "./routes/watch";
+import api from "./routes/api";
 
 require('dotenv').config();
 
@@ -94,6 +95,7 @@ app.use('/', home);
 app.use('/oauth', oauth);
 app.use('/newuser',newuser);
 app.use('/watch',watch);
+app.use('/api',api);
 
 
 //server

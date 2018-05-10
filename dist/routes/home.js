@@ -25,7 +25,7 @@ router.post('/time', function (req, res) {
     });
 });
 router.get('/confirm', function (req, res) {
-    if (req.session) {
+    if (req.user) {
         model_1.UserModel.find({ UserId: req.user.id }, function (err, result) {
             if (err) {
                 console.log(err);

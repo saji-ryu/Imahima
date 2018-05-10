@@ -1,4 +1,10 @@
 ///<reference path="../node_modules/@types/node/index.d.ts"/>
+declare module "express" { // declare module "express-serve-static-core"
+    export interface Request {
+        user: any
+    }
+}
+
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
@@ -25,8 +31,8 @@ const TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 
 const port: number = Number(process.env.PORT) || 3000;
 const mongoURI: string = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
-//const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
-const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
+const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
+//const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
 
 
 //passport

@@ -5,7 +5,22 @@ const router: express.Router = express.Router();
 
 router.get('/',  (req, res)=> {
     if (req.user) {
-        UserModel.find({UserId: req.user.id}, (err, result) => {
+        UserModel.find((req.query), (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(result[0]);
+            res.send(result[0]);
+        });
+    } else {
+        res.send(null);
+    }
+});
+
+
+router.get('/me',(req, res) => {
+    if (req.user) {
+        UserModel.find({UserId:req.user.id}, (err, result) => {
             if (err) {
                 console.log(err);
             }

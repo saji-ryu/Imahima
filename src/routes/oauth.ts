@@ -8,7 +8,9 @@ import * as passport from 'passport';
 router.get('/twitter', passport.authenticate('twitter'));
 
 router.get('/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/login'}), function (req, res) {
-    if (req.user) {
+    if (!req.user) {
+        res.redirect('/');
+    }else{
         let id: string = req.user.id;
         UserModel.find({UserId: id}, (err, result) => {
             if (err) {
@@ -20,7 +22,7 @@ router.get('/twitter/callback', passport.authenticate('twitter', {failureRedirec
                     UserId: id,
                     UserIcon: req.user.photos[0].value,
                     IsHima: false,
-                    HimaTime: 0
+                    HimaTime: Date.now()
                 });
                 user.save(function (err) {
                     console.log('new regi');
@@ -33,8 +35,6 @@ router.get('/twitter/callback', passport.authenticate('twitter', {failureRedirec
                 res.redirect('/');
             }
         });
-    }else{
-        res.redirect('/');
     }
 });
 

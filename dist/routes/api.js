@@ -5,6 +5,20 @@ var model_1 = require("../model");
 var router = express.Router();
 router.get('/', function (req, res) {
     if (req.user) {
+        model_1.UserModel.find((req.query), function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            console.log(result[0]);
+            res.send(result[0]);
+        });
+    }
+    else {
+        res.send(null);
+    }
+});
+router.get('/me', function (req, res) {
+    if (req.user) {
         model_1.UserModel.find({ UserId: req.user.id }, function (err, result) {
             if (err) {
                 console.log(err);

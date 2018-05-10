@@ -21,8 +21,8 @@ var TWITTER_CONSUMER_KEY = process.env.TW_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TW_CONSUMER_SECRET;
 var port = Number(process.env.PORT) || 3000;
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/imahima';
-//const tw_callback: string = "http://127.0.0.1:3000/oauth/twitter/callback";
-var tw_callback = "https://imahima.herokuapp.com/oauth/twitter/callback";
+var tw_callback = "http://127.0.0.1:3000/oauth/twitter/callback";
+//const tw_callback:string = "https://imahima.herokuapp.com/oauth/twitter/callback";
 //passport
 passport.serializeUser(function (user, done) {
     done(null, user);
